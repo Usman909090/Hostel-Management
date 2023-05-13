@@ -1,31 +1,45 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import { toast } from "react-toastify";
+import { authContext } from "../context/authContext";
+import { apiRequest } from "../api/httpService";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  console.log({ email, password });
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const response = fetch("http://localhost:4000/admin/properties").then(
-      (response) => {
-        response.json().then((users) => {
-          console.log({ users });
-          const isValidUser = users.filter(
-            (user) => user.email === email && user.password === password
-          );
-          console.log({ isValidUser });
-          if (isValidUser.length === 0) {
-            toast("Email or Password Incorrect");
-            return;
-          }
-        });
+  const [data, setData] = useState({
+    email: "",
+    password: ""
+  })
+
+  const { setUserSession, userSession } = useContext(authContext)
+
+  const handleChange = event => {
+    event.preventDefault()
+    const { name, value } = event.target;
+    setData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault()
+    console.log({ data })
+    if (Object.values(data).some((fieldValue) => !fieldValue)) return toast.error("Incomplete Form")
+    apiRequest("auth/login", data).then(response => {
+      console.log("hey login response", response)
+      if (response?.token) {
+        setUserSession(response)
       }
-    );
-  };
+    })
+  }
+
+  useEffect(() => {
+    if (userSession?.token) {
+      navigate("/register-property", { replace: true })
+
+    }
+  }, [userSession?.token])
+
+
   return (
     <div>
       <meta charSet="utf-8" />
@@ -162,8 +176,9 @@ const LoginPage = () => {
                           id="form3Example3"
                           className="form-control form-control-lg"
                           placeholder="Uername"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
+                          name="email"
+                          value={data?.email}
+                          onChange={handleChange}
                         />
                       </div>
                     </div>
@@ -175,8 +190,9 @@ const LoginPage = () => {
                           id="form3Example4"
                           className="form-control form-control-lg"
                           placeholder="Password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
+                          name="password"
+                          value={data?.password}
+                          onChange={handleChange}
                           required
                         />
                       </div>

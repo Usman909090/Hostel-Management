@@ -1,1 +1,1 @@
-{"users":[],"properties":[]}
+{"users":[{"id":1,"firstName":"Numan","lastName":"Arshad","phoneNumber":"78876","dateOfBirth":"2023-05-18","gender":"male","cnic":36293030303,"email":"numanuet311@gmail.com","password":"$2b$10$FO3/5HGYiwyTdldUGcvH5ObQBqw5D2GQd0yGo7CZerS34okH0sVEG"},{"id":2,"firstName":"svs","lastName":"Arshad","phoneNumber":"78876","dateOfBirth":"2023-05-04","gender":"male","cnic":36293030303,"email":"numan1@gmail.com","password":"$2b$10$Wl3jW08D6b4B1IPduxBRXeLxnzPlckYeR3WRTkTi3fWG6y.shnq8m"}],"properties":[]}

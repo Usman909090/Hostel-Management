@@ -1,57 +1,44 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { authContext } from "../context/authContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  // const [activeIndex, setActiveIndex] = useState(
-  //   localStorage.getItem("activeIndex")
-  //     ? localStorage.getItem("activeIndex")
-  //     : 0
-  // );
-  const activeIndex = localStorage.getItem("activeIndex")
-    ? localStorage.getItem("activeIndex")
-    : 0;
-  console.log({ activeIndex });
+  const [activeNav, setActiveNav] = useState(
+    window.location.pathname
+  );
+
+  const { userSession } = useContext(authContext)
+
+  const navList = userSession?.token ? "Admin" : "Public"
+
+  const navItems = {
+    Public: [{ title: "Home", route: "/" }, { title: "Login", route: "/login" }],
+    Admin: [{ title: "Register Property", route: "/register-property" },
+    { title: "Logout", route: "/login" }]
+  }
+
+
   return (
     <ul className="nav navbar-nav">
-      <li className={`${activeIndex == 0 && "active"}`}>
-        {" "}
-        <a
-          onClick={() => {
-            localStorage.setItem("activeIndex", "0");
-            navigate("/");
-          }}
-        >
-          Home
-        </a>
-      </li>
-      <li className={`${activeIndex && activeIndex === "1" && "active"}`}>
-        {" "}
-        <a
-          onClick={() => {
-            localStorage.setItem("activeIndex", "1");
-            navigate("/registerproperty");
-          }}
-        >
-          Register Property
-        </a>
-      </li>
-      <li className={`${activeIndex && activeIndex === "2" && "active"}`}>
-        {" "}
-        <a
-          onClick={() => {
-            localStorage.setItem("activeIndex", "2");
-            navigate("/login");
-          }}
-        >
-          Login
-        </a>
-      </li>
+
+      {navItems[navList].map(({ title, route }, index) =>
+        <li className={`${route === activeNav && "active"}`}>
+          {" "}
+          <a
+            onClick={(event) => {
+              event.preventDefault()
+              navigate(route);
+            }}
+            href={route}
+          >
+            {title}
+          </a>
+        </li>
+      )}
+
       <li
-        className={`${activeIndex && activeIndex === "3" && "active"}`}
-        onClick={() => {
-          localStorage.setItem("activeIndex", "3");
-        }}
+
       >
         <a>Features</a>
         <span className="arrow" />

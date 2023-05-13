@@ -30,8 +30,8 @@ const signUp = tryCatchWrapper(async (req, res, next) => {
 
     if (hashPassword) {
         const payload = {
-            email: req.body.email,
             id: data.users.length + 1,
+            ...req.body
         }
 
         data.users.push({ ...payload, password: hashPassword })

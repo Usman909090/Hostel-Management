@@ -1,27 +1,47 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
+import { apiRequest } from "../api/httpService";
+import { toast } from "react-toastify";
+import { authContext } from "../context/authContext";
+import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [gender, setGender] = useState("");
-  const [cnic, setCNIC] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
+  const [data, setData] = useState({
+    firstName: "Numan",
+    lastName: "Arshad",
+    phoneNumber: "78876",
+    dateOfBirth: "",
+    gender: "male",
+    cnic: 36293030303,
+    email: "",
+    password: ""
+  })
+
+  const { setUserSession } = useContext(authContext)
+  const navigate = useNavigate()
+
+  const handleChange = event => {
+    event.preventDefault()
+    const { name, value } = event.target;
+    setData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault()
+    console.log({ data })
+    if (Object.values(data).some((fieldValue) => !fieldValue)) return toast.error("Incomplete Form")
+    apiRequest("auth/signup", data).then(response => {
+      console.log("hey response", response)
+      if (response?.token) {
+        setUserSession(response)
+        navigate("/register-property")
+      }
+    })
+  }
 
   const gendersList = ["Male", "Female", "Other"];
-  console.log({
-    firstname,
-    lastname,
-    phoneNumber,
-    dateOfBirth,
-    gender,
-    cnic,
-    email,
-    password,
-  });
+
   return (
     <div>
       <meta charSet="utf-8" />
@@ -142,10 +162,10 @@ const SignupPage = () => {
                           <label className="input">
                             <input
                               type="text"
-                              name="firstname"
+                              name="firstName"
                               placeholder="First name"
-                              value={firstname}
-                              onChange={(e) => setFirstname(e.target.value)}
+                              value={data?.firstName}
+                              onChange={handleChange}
                             />
                           </label>
                         </section>
@@ -153,10 +173,10 @@ const SignupPage = () => {
                           <label className="input">
                             <input
                               type="text"
-                              name="lastname"
+                              name="lastName"
                               placeholder="Last name"
-                              value={lastname}
-                              onChange={(e) => setLastname(e.target.value)}
+                              value={data?.lastName}
+                              onChange={handleChange}
                             />
                           </label>
                         </section>
@@ -165,10 +185,10 @@ const SignupPage = () => {
                         <label className="input">
                           <input
                             type="number"
-                            name="phonenumber"
+                            name="phoneNumber"
                             placeholder="Phone Number"
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            value={data?.phoneNumber}
+                            onChange={handleChange}
                           />
                         </label>
                       </section>
@@ -176,18 +196,19 @@ const SignupPage = () => {
                         <label className="input">
                           <input
                             type="date"
-                            name="dob"
+                            name="dateOfBirth"
                             placeholder="Date of Birth"
-                            value={dateOfBirth}
-                            onChange={(e) => setDateOfBirth(e.target.value)}
+                            value={data?.dateOfBirth}
+                            onChange={handleChange}
                           />
                         </label>
                       </section>
                       <section>
                         <label className="select">
                           <select
-                            onChange={(e) => setGender(e.target.value)}
+                            onChange={handleChange}
                             name="gender"
+                            value={data?.gender}
                           >
                             {gendersList.map((option, index) => {
                               return <option key={index}>{option}</option>;
@@ -202,8 +223,8 @@ const SignupPage = () => {
                             type="text"
                             name="cnic"
                             placeholder="CNIC"
-                            value={cnic}
-                            onChange={(e) => setCNIC(e.target.value)}
+                            value={data?.cnic}
+                            onChange={handleChange}
                           />
                         </label>
                       </section>
@@ -217,8 +238,8 @@ const SignupPage = () => {
                             type="email"
                             name="email"
                             placeholder="Email address"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={data?.email}
+                            onChange={handleChange}
                           />
                           <b className="tooltip tooltip-bottom-right">
                             Needed to verify your account
@@ -234,8 +255,8 @@ const SignupPage = () => {
                             name="password"
                             placeholder="Password"
                             id="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={data?.password}
+                            onChange={handleChange}
                           />
                           <b className="tooltip tooltip-bottom-right">
                             Don't forget your password
@@ -244,7 +265,7 @@ const SignupPage = () => {
                       </section>
                     </fieldset>
                     <footer>
-                      <button type="submit" className="button">
+                      <button type="submit" className="button" onClick={handleSubmit}>
                         Submit
                       </button>
                     </footer>
