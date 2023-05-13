@@ -13,6 +13,9 @@ server.use(bodyParser.json())
 
 server.post("/auth/login", authController.login)
 server.post("/auth/signup", authController.signUp)
+server.post("/auth/forgotPassword", authController.forgotPassword)
+
+server.post("/auth/resetPassword", authController.resetPassword)
 server.use("/admin", verifyToken, router)
 
 server.use((error, req, res, next) => {
