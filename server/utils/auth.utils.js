@@ -32,7 +32,7 @@ const sendRequestCode = async (requestEmail, requestCode) => {
         subject: 'Reset Password',
         text: requestCode
     };
-    await transporter.sendMail(mailOptions)
+    //  await transporter.sendMail(mailOptions)
     return "success"
 }
 

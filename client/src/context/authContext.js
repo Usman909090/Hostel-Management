@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react"
 
-const authContext = createContext({ userSession: undefined, setUserSession: () => { }, handleLogout: () => { } })
+const authContext = createContext({ userSession: undefined, setUserSession: () => { } })
 
 const AuthContextProvider = ({ children }) => {
     const [userSession, setUserSession] = useState(() => {
@@ -11,10 +11,7 @@ const AuthContextProvider = ({ children }) => {
             return undefined
         }
     })
-    const handleLogout = event => {
-        event.preventDefault()
-        setUserSession(undefined)
-    }
+
     useEffect(() => {
         if (userSession) {
             localStorage.setItem("userSession", JSON.stringify(userSession))
@@ -25,7 +22,7 @@ const AuthContextProvider = ({ children }) => {
         }
     }, [userSession])
 
-    return <authContext.Provider value={{ userSession, setUserSession, handleLogout }}>
+    return <authContext.Provider value={{ userSession, setUserSession }}>
         {children}
     </authContext.Provider>
 }

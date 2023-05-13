@@ -8,7 +8,7 @@ const Navbar = () => {
     window.location.pathname
   );
 
-  const { userSession } = useContext(authContext)
+  const { userSession, setUserSession } = useContext(authContext)
 
   const navList = userSession?.token ? "Admin" : "Public"
 
@@ -28,6 +28,11 @@ const Navbar = () => {
           <a
             onClick={(event) => {
               event.preventDefault()
+              if (title?.includes("Logout")) {
+                setUserSession(undefined)
+                navigate(route, { replace: true });
+                return
+              }
               navigate(route);
             }}
             href={route}

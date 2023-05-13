@@ -204,7 +204,7 @@ const LoginPage = () => {
                           className="text-body"
                           style={{ color: "gray", fontSize: "12px" }}
                           onClick={() => {
-                            navigate("/forgotpassword");
+                            navigate("/forgot-password");
                           }}
                         >
                           Forgot password?

@@ -1,7 +1,7 @@
 import { toast } from "react-toastify"
 
 export const apiRequest = (url, body = undefined) => {
-    return fetch(url, {
+    return fetch(`http://localhost:4000/${url}`, {
         headers: { 'Content-Type': 'application/json' },
         ...(body && {
             method: "POST",

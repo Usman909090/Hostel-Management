@@ -66,13 +66,13 @@ const forgotPassword = tryCatchWrapper(async (req, res, next) => {
 
 const resetPassword = tryCatchWrapper(async (req, res, next) => {
     const requestEmail = req.body.email;
+
     const user = findUserByEmail(requestEmail)
     if (!user) throw new CustomError("User not exist", 400);
-
+    if (!user.requestCode) throw new CustomError("Invalid Code", 422);
     const isMatch = await bcrypt.compare(req.body.requestCode, user.requestCode)
 
     if (!isMatch) throw new CustomError("Invalid Code", 422);
-
     const hashPassword = await bcrypt.hash(req.body.password, 10)
 
     data.users = data.users.map((user) => {

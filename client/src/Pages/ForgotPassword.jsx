@@ -1,6 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
+import { apiRequest } from "../api/httpService";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
+
+  const [email, setEmail] = useState("")
+
+
+  const navigate = useNavigate()
+
+  const [resetPasswordPayload, setResetPasswordPayload] = useState({
+    requestCode: "",
+    newPassword: "",
+    confirmPassword: ""
+  })
+  const handleSendRequesCode = event => {
+    event.preventDefault()
+    if (!email) return toast.error("Email is requied!")
+    apiRequest("auth/forgotPassword", { email }).then(response => {
+      console.log({ forgot: response })
+      if (response?.data) {
+        toast.success(response?.data)
+      }
+    })
+  }
+
+
+  const handleChange = event => {
+    event.preventDefault()
+    const { name, value } = event.target;
+    setResetPasswordPayload(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleResetPassword = event => {
+    event.preventDefault()
+    if (Object.values(resetPasswordPayload).some((fieldValue) => !fieldValue)) return toast.error("Incomplete Form")
+    const { newPassword, confirmPassword, requestCode } = resetPasswordPayload
+
+    if (newPassword !== confirmPassword) {
+      return toast.error("Confirm password is different from new password")
+    }
+
+    apiRequest("auth/ResetPassword", { email, requestCode, password: newPassword }).then(response => {
+      if (response?.data) {
+        toast.success(response?.data)
+        navigate("/login", { replace: true })
+      }
+    })
+  }
   return (
     <div>
       <meta charSet="utf-8" />
@@ -171,6 +219,11 @@ const ForgotPassword = () => {
                             type="email"
                             name="email"
                             placeholder="Enter Email"
+                            value={email}
+                            onChange={event => {
+                              event.preventDefault()
+                              setEmail(event.target.value)
+                            }}
                           />
                           <b className="tooltip tooltip-bottom-right">
                             Needed to verify your account
@@ -178,7 +231,7 @@ const ForgotPassword = () => {
                         </label>
                       </section>
                       <section>
-                        <button type="submit" className="button">
+                        <button onClick={handleSendRequesCode} className="button">
                           Send Code
                         </button>
                       </section>
@@ -190,9 +243,12 @@ const ForgotPassword = () => {
                           <i className="icon-append fa fa-lock" />
                           <input
                             type="text"
-                            name="verificationCode"
+                            name="requestCode"
                             placeholder="Type Verification Code"
                             id="verificationCode"
+                            value={resetPasswordPayload?.requestCode}
+                            onChange={handleChange}
+
                           />
                           <b className="tooltip tooltip-bottom-right">
                             Type Verification Code
@@ -208,6 +264,8 @@ const ForgotPassword = () => {
                             name="newPassword"
                             placeholder="Type New Password"
                             id="new Password"
+                            value={resetPasswordPayload?.newPassword}
+                            onChange={handleChange}
                           />
                           <b className="tooltip tooltip-bottom-right">
                             Type New Password
@@ -220,9 +278,11 @@ const ForgotPassword = () => {
                           <i className="icon-append fa fa-lock" />
                           <input
                             type="password"
-                            name="retypePassword"
+                            name="confirmPassword"
                             placeholder="Re-type New Password"
                             id="retypePassword"
+                            value={resetPasswordPayload?.confirmPassword}
+                            onChange={handleChange}
                           />
                           <b className="tooltip tooltip-bottom-right">
                             Re-type New Password
@@ -231,7 +291,7 @@ const ForgotPassword = () => {
                       </section>
                     </fieldset>
                     <footer>
-                      <button type="submit" className="button">
+                      <button onClick={handleResetPassword} className="button">
                         Submit
                       </button>
                     </footer>
