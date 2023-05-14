@@ -11,8 +11,8 @@ tryCatchWrapper = controller => async (req, res, next) => {
         await controller(req, res, next)
     }
     catch (error) {
-        console.log("wrapper error", error)
-        next(new CustomError(error?.message, error?.statusCode))
+        console.log("wrapper error", error, error?.message.includes("expired"))
+        next(new CustomError(error?.message, error?.message.includes("expired") ? 401 : error?.statusCode))
     }
 }
 

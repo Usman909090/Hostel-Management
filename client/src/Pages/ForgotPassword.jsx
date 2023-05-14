@@ -145,13 +145,13 @@ const ForgotPassword = () => {
                           </li>
                           <li className>
                             {" "}
-                            <a href="register-property.html">
+                            <a href="/register-property">
                               Register Property
                             </a>
                           </li>
                           <li className>
                             {" "}
-                            <a href="login.html">Login</a>
+                            <a href="/login">Login</a>
                           </li>
                           <li>
                             <a href="#">Features</a>
@@ -203,7 +203,13 @@ const ForgotPassword = () => {
         <div className="clearfix" />
         {/* end features Section 04 */}
         <div className="section-lg">
-          <section className="vh-100">
+          <section className="vh-100"
+            style={{
+              background: "url(images/forgot-password.png)",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundAttachment: "fixed",
+            }}>
             <div className="container">
               <div className="row d-flex justify-content-center align-items-center h-100">
                 <div className="col-md-5 col-md-offset-7 col-lg-4 offset-xl-8 col-sm-8 col-sm-offset-4 col-xs-12 ">

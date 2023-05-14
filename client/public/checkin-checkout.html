@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>BH - Developed by Team Tech</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+
+<!-- Template Styles -->
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/Simple-Line-Icons-Webfont/simple-line-icons.css"/>
+<link rel="stylesheet" href="css/et-line-font/et-line-font.css">
+
+<!-- Mega Menu -->
+<link rel="stylesheet" href="js/megamenu/stylesheets/screen.css">
+
+<!-- Responsive Devices Styles -->
+<link rel="stylesheet" media="screen" href="css/responsive-leyouts.css" type="text/css" />
+
+<!-- forms -->
+<link rel="stylesheet" href="js/form/css/demo.css" type="text/css" media="all">
+<link rel="stylesheet" href="js/form/css/sky-forms.css" type="text/css" media="all">
+<style>
+	.section-lg{
+		padding:0px;
+	}
+	.paddingZero{
+		padding:0px;
+	}
+	.heading3{
+		display: block;
+    padding: 20px 30px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    font-size: 25px;
+    font-weight: 300;
+    color: #232323;
+	}
+	#upload {
+    opacity: 0;
+}
+.list-group-item {
+  background-color: transparent;
+  border: none;
+}
+.list-group-item > a {
+	color: white;
+	font-size: 20px;
+}
+.sky-form fieldset {
+  border: none;
+  background: transparent;
+}
+</style>
+<script type="text/javascript">
+
+/*  ==========================================
+    SHOW UPLOADED IMAGE
+* ========================================== */
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#imageResult')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$(function () {
+    $('#upload').on('change', function () {
+        readURL(input);
+    });
+});
+
+/*  ==========================================
+    SHOW UPLOADED IMAGE NAME
+* ========================================== */
+var input = document.getElementById( 'upload' );
+var infoArea = document.getElementById( 'upload-label' );
+
+input.addEventListener( 'change', showFileName );
+function showFileName( event ) {
+  var input = event.srcElement;
+  var fileName = input.files[0].name;
+  infoArea.textContent = 'File name: ' + fileName;
+}
+
+</script>
+</head>
+<body style="background:url('images/checkin-checkout.png');margin: 0;
+padding: 0;
+background-attachment: fixed;
+background-position: 50% 50%;
+background-size: cover;">
+<div class="site-wrapper">
+	<div class="temp-header sty1">
+		<div class="top-bar solid-dark">
+		<div class="container">
+			<div class="row">
+			<div class="col-md-6"><i class="fa fa-envelope-o"></i> i222562@nu.edu.pk <span>|</span> <i class="fa fa-user"></i> Team Tech</div>
+			<div class="col-md-6 right-padd0 text-right social-media nodisplay"> <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-google-plus"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-flickr"></i></a> </div>
+			</div>
+			<!--end of row-->
+		</div>
+		</div>
+		<div class="header-section white pin-style">
+		<div class="container">
+			<div class="mod-menu">
+			<div class="row">
+				<div class="col-sm-2"><img src="images/logo.png" width="80" height="80"/></div>
+				<div class="col-sm-10">
+				<div class="main-nav">
+					<div id="menu" class="collapse">
+						<ul class="nav navbar-nav">
+              				<li class=""> <a href="home.html">Home</a></li>
+							<li class=""> <a href="/register-property">Register Property</a></li>
+							<li class=""> <a href="/login">Login</a></li>
+
+
+							<li class="active"><a href="#">Hostels</a><span class="arrow"></span>
+								<ul class="dm-align-2">
+									<li><a href="booking.html">Booking</a></li>
+									<li><a href="checkin-checkout.html">Checkin Checkout</a></li>
+									<li><a href="food-menu.html">Food Menu</a></li>
+									<li><a href="comparison-of-hostel.html">Compare Hostels</a></li>
+									<li><a href="short-listed-hostels.html">Shortlisted Hostels</a></li>
+									<li><a href="hostel-images.html">Hostel Images</a></li>
+								</ul>
+							</li>
+							<li class=""><a href="#">Features</a><span class="arrow"></span>
+								<ul class="dm-align-2">
+									<li><a href="trips.html">Trips</a></li>
+									<li><a href="activities.html">Activities</a></li>
+									<li><a href="adventure.html">Adventure</a></li>
+									<li><a href="notifications.html">Notifications</a></li>
+									<li><a href="online-payment.html">Oline Payment</a></li>
+									<li><a href="feature-option.html">Feature Options</a></li>
+									<li><a href="special-discount.html">Special Discounts </a></li>
+									<li><a href="personalized-recommendations.html">Peronalized Recommendations </a></li>
+									<li><a href="whether-updates.html">Weather Updates</a></li>
+									<li><a href="user-and-hostel-profile.html.html">Profile <i class="fa fa-angle-right right" aria-hidden="true"></i> </a> <span class="arrow"></span>
+										<ul>
+											<li><a href="user-and-hostel-profile.html.html">User Profile</a></li>
+											<li><a href="user-and-hostel-profile.html.html">Hostel Profile</a></li>
+										</ul>
+									</li>
+									<li><a href="#">Support <i class="fa fa-angle-right right" aria-hidden="true"></i> </a> <span class="arrow"></span>
+									<ul>
+										<li><a href="hostel-chat.html">Hostel Chat</a></li>
+										<li><a href="manager-chat.html">Manager Chat</a></li>
+										<li><a href="user-support.html">User Support</a></li>
+									</ul>
+									</li>
+									<li class=""> <a href="signup.html">Signup</a></li>
+
+									<li class=""> <a href="forgot-password.html">Forgot Password</a></li>
+								</ul>
+
+							</li>
+						</ul>
+					</div>
+				</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<!--end menu-->
+		</div>
+		<!--end menu-->
+	</div>
+	<div class="clearfix"></div>
+	<!-- end features Section 04 -->
+	<div class="section-lg">
+		<section class="vh-100">
+			<div class="container">
+			  <div class="row d-flex justify-content-center align-items-center h-100" style="padding-bottom: 200px; margin-top:50px;">
+
+				<div class="col-md-10 col-md-offset-1 col-lg-10 offset-xl-1 col-sm-12 col-xs-12">
+				 <br>
+				 <form action="" id="registration-form" class="sky-form">
+
+				   <div class="col-md-6 col-xs-6 col-lg-6 col-sm-6">
+					<fieldset>
+						<section>
+							<label class="input"> <i class="icon-append fa fa-user"></i>
+							  <input type="email" name="email" placeholder="Name">
+							  <b class="tooltip tooltip-bottom-right">Name</b> </label>
+						</section>
+
+						<section>
+						 <label class="input"> <i class="icon-append fa fa-bars"></i>
+						   <input type="email" name="email" placeholder="Enter ID">
+						   <b class="tooltip tooltip-bottom-right">ID</b> </label>
+						 </section>
+
+						 <section>
+							 <label class="input"> <i class="icon-append fa fa-envelope-o"></i>
+							   <input type="email" name="email" placeholder="Enter Email">
+							   <b class="tooltip tooltip-bottom-right">Email</b> </label>
+						 </section>
+
+
+						 <section>
+							 <label class="input"> <i class="icon-append fa fa-phone"></i>
+							   <input type="email" name="email" placeholder="Phone">
+							   <b class="tooltip tooltip-bottom-right">Phone</b> </label>
+						 </section>
+
+					</fieldset>
+				   </div>
+				   <div class="col-md-6 col-xs-6 col-lg-6 col-sm-6">
+					<fieldset>
+						<div class="row py-4" style="padding-bottom: 2px;">
+							<div class="col-lg-6 mx-auto">
+
+								<div class="col-md-12"><img id="imageResult" src="images/profile.png" alt="" class="img-responsive  rounded shadow-sm mx-auto d-block"></div>
+
+							</div>
+						</div>
+						<br/>
+					</fieldset>
+				   </div>
+				 </form>
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="row d-flex justify-content-center align-items-center h-100" style="padding-bottom: 200px; margin-top:50px;">
+					<ul class="list-group">
+					  <li class="list-group-item"><a href="#">Weather</a></li>
+					  <li class="list-group-item"><a href="#">Food Menu</a></li>
+					  <li class="list-group-item"><a href="#">Hostel Chat</a></li>
+					  <li class="list-group-item"><a href="#">Chat wih Manager</a></li>
+					  <li class="list-group-item"><a href="#">Checkout</a></li>
+					</ul>
+				  </div>
+			  </div>
+			</div>
+		  </section>
+	</div>
+</div>
+
+		<!-- end features Section 05 -->
+
+		<!-- end features Section 12 -->
+		<footer class="footer blue-bg">
+		  <div class="footer-content">
+			<div class="container">
+			  <div class="row">
+				<div class="col-md-3 m-bot-2">
+				  <!-- Footer widget area 1 -->
+				  <h4 class="uppercase f-15 font-bold white m-bot-3">About Us</h4>
+				  <ul class="list-icon">
+					<li><i class="fa fa-map-marker"></i> This website is developed by Team Tech as a project in university.</li>
+					<li><i class="fa fa-envelope"></i> <a href="mailto:i222562@nu.edu.pk" class="white">i222562@nu.edu.pk</a></li>
+				  </ul>
+				  <!-- Social icons -->
+				  <div class="social-icons bor-light">
+					<ul>
+					  <li><a href="#"><i class="fa fa-rss white"></i></a></li>
+					  <li><a href="#"><i class="fa fa-facebook white"></i></a></li>
+					  <li><a href="#"><i class="fa fa-twitter white"></i></a></li>
+					  <li><a href="#"><i class="fa fa-youtube white"></i></a></li>
+					  <li><a href="#"><i class="fa fa-pinterest white"></i></a></li>
+					  <li><a href="#"><i class="fa fa-google-plus white"></i></a></li>
+					</ul>
+				  </div>
+				  <!-- end: Social icons -->
+				  <!-- end: Footer widget area 1 -->
+				</div>
+				<div class="col-md-3 m-bot-2 col-md-offset-1">
+				  <!-- Footer widget area 4 -->
+				  <h4 class="uppercase f-15 font-bold white m-bot-3">Developer Contact</h4>
+				  <div class="row clearfix">
+					<div class="col-xs-12 col-sm-12 col-md-12">
+
+						<p class="white">You can access us on Facebook,
+							Instagram and E-mail. </p>
+					</div>
+
+				  </div>
+				  <!-- end: Footer widget area 4 -->
+				</div>
+				<div class="col-md-5 m-bot-2">
+				  <!-- Footer widget area 2 -->
+				  <div class="show-post sty-one"><img src="images/logo.png" alt="Image" class="pull-right">
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</footer>
+		<!-- end footer -->
+		<!-- end site wrapper-->
+	  </div>
+	  <a href="#" class="scrollup"></a>
+	  <!-- end scroll to top of the page-->
+
+
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+<!-- form -->
+<script type="text/javascript" src="js/form/jquery.form.min.js"></script>
+<script type="text/javascript" src="js/form/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/form/jquery.modal.js"></script>
+
+</body>
+</html>

@@ -145,7 +145,13 @@ const SignupPage = () => {
         <div className="clearfix" />
         {/* end features Section 04 */}
         <div className="section-lg">
-          <section className="vh-100">
+          <section className="vh-100"
+            style={{
+              background: "url(images/signup-img.jpg)",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundAttachment: "fixed",
+            }}>
             <div className="container">
               <div className="row d-flex justify-content-center align-items-center h-100">
                 {/*<div class="col-md-6 col-lg-6 col-xl-5 paddingZero">

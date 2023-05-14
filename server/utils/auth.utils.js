@@ -27,7 +27,7 @@ transporter.verify((error, success) => {
 
 const sendRequestCode = async (requestEmail, requestCode) => {
     const mailOptions = {
-        from: "risingPearls16@gmail.com", //sender email
+        from: "***@gmail.com", //sender email
         to: requestEmail,
         subject: 'Reset Password',
         text: requestCode
@@ -52,6 +52,7 @@ const verifyToken = tryCatchWrapper(async (req, res, next) => {
             next()
             return
         }
+
     }
     else {
         next(new CustomError("Please provide api key", 401))

@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
+import { toast } from "react-toastify";
+import { apiRequest } from "../api/httpService";
+import { authContext } from "../context/authContext";
+import { useNavigate } from "react-router-dom";
 
 const RegisterProperty = () => {
-  const [formState, setFormState] = useState({
+  const navigate = useNavigate()
+  const DEFAULT = {
     propertyName: "",
     propertyType: "",
     totalBedrooms: "",
@@ -20,11 +25,31 @@ const RegisterProperty = () => {
     currency: "",
     language: "",
     phoneNumber: "",
-  });
+  }
+  const [formState, setFormState] = useState(DEFAULT);
 
-  const handleSubmit = () => {
+  const { userSession } = useContext(authContext)
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
     console.log({ formState });
+    if (Object.values(formState).some((fieldValue) => !fieldValue)) return toast.error("Incomplete Form")
+
+    apiRequest("admin/properties", formState, userSession?.token).then(response => {
+      console.log({ properties: response })
+      if (response?.id) {
+        toast.success("Property register successfully!")
+        setFormState(DEFAULT)
+
+      }
+    })
   };
+  useEffect(() => {
+    if (!userSession) {
+      navigate("/login")
+    }
+  }, [userSession])
+
   return (
     <div>
       <meta charSet="utf-8" />
@@ -128,11 +153,19 @@ const RegisterProperty = () => {
         <div className="clearfix" />
         {/* end features Section 04 */}
         <div className="section-lg">
-          <section className="vh-100">
+          <section
+            className="vh-100"
+            style={{
+              background: "url(images/registerProperty.png)",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundAttachment: "fixed",
+            }}
+          >
             <div className="container">
               <div className="row d-flex justify-content-center align-items-center h-100">
                 {/*<div class="col-md-6 col-lg-6 col-xl-5 paddingZero">
-				  <img src="images/signup-img.jpg"
+				  // <img src="images/signup-img.jpg"
 					class="img-responsive" alt="Sample image">
 				</div>*/}
                 <div className="col-md-10 col-md-offset-1 col-lg-10 offset-xl-1 col-sm-12 col-xs-12 ">

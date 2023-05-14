@@ -13,7 +13,7 @@ const Navbar = () => {
   const navList = userSession?.token ? "Admin" : "Public"
 
   const navItems = {
-    Public: [{ title: "Home", route: "/" }, { title: "Login", route: "/login" }],
+    Public: [{ title: "Login", route: "/login" }],
     Admin: [{ title: "Register Property", route: "/register-property" },
     { title: "Logout", route: "/login" }]
   }
@@ -21,6 +21,7 @@ const Navbar = () => {
 
   return (
     <ul className="nav navbar-nav">
+      <li class=""> <a href="home.html">Home</a></li>
 
       {navItems[navList].map(({ title, route }, index) =>
         <li className={`${route === activeNav && "active"}`}>
